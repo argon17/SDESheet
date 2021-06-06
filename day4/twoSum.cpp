@@ -6,6 +6,24 @@ using namespace std;
 
 class Solution {
 public:
+    //two pointer approach to print the elements, not indices
+    // vector<int> twoSum(vector<int>& nums, int target) {
+    //     vector<int> ans;
+    //     sort(nums.begin(), nums.end());
+    //     int n = nums.size();
+    //     int l=0, r=n-1;
+    //     while(l<r){
+    //         int sum = nums[l]+nums[r];
+    //         if(sum<target) ++l;
+    //         else if(sum>target) --r;
+    //         else{
+    //             ans.push_back(l);
+    //             ans.push_back(r);
+    //             return ans;
+    //         }
+    //     }
+    //     return ans;
+    // }
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<int> ans;
         unordered_map<int, int> mpp;
