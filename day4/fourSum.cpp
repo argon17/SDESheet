@@ -4,7 +4,7 @@ using namespace std;
 
 #define rep(i,n) for(int i=0; i<n; i++)
 
-// O(N^3)
+// O(N^3) - two pointer approach
 
 class Solution {
 public:
