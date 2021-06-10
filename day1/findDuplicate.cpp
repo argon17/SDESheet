@@ -21,11 +21,15 @@ public:
         
         int slow = nums[0];
         int fast = nums[0];
+
+        // move fast with double speed of slow pointer
         do{
             slow = nums[slow];
             fast = nums[nums[fast]];
         }while(slow != fast);
         
+        // detected the cycle now just move with same speed,
+        // till we find the entry point of the cycle, i.e, slow == fast
         slow = nums[0];
         while(slow != fast ){
             slow = nums[slow];
