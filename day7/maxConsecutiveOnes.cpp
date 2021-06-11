@@ -17,9 +17,7 @@ public:
     // shorter code :)
     int findMaxConsecutiveOnes1(vector<int>& nums) {
         int cur = 0, mx = 0;
-        for(int i=0; i<nums.size(); i++){
-            nums[i] == 1 ? mx = max( ++cur, mx ) : cur = 0;
-        }
+        for(auto e : nums) e == 1 ? mx = max( ++cur, mx ) : cur = 0;
         return mx;
     }
 };
