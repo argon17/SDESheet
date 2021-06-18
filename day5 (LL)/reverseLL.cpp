@@ -17,7 +17,7 @@ public:
         ListNode* r = nullptr;
         while(p != nullptr ){
 
-            // sliding pointers ... r - q - p ...
+            // sliding pointers ... r -> q -> p ...
             r = q;
             q = p;
             p = p -> next;
