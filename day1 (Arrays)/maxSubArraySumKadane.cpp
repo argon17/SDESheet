@@ -6,18 +6,18 @@ class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
         
-        int sum = 0, maxx = INT_MIN;
+        int cur = 0, mx = INT_MIN;
         
         // iterate over the array
         for(auto it : nums ){
-            // add the element to the previous sum
-            sum += it;
-            // assign maxx to max of sum and maxx
-            maxx = max( sum, maxx );
-            // if sum is negative, don't carry it further
-            sum = sum < 0 ? 0 : sum;
+            // add the element to the previous cur
+            cur += it;
+            // assign maxx to max of cur and maxx
+            mx = max( cur, mx );
+            // if cur is negative, don't carry it further
+            cur = cur < 0 ? 0 : cur;
         }
-        return maxx;
+        return mx;
     }
 };
 
