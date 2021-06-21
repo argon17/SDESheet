@@ -8,6 +8,7 @@ public:
         // there can only be two majority elements
         int c1 = 0, c2 = 0, e1 = 0, e2 = 0;
         for(auto num : nums){
+            // keep cancelling e1 and e2 with num
             if(num == e1) ++c1;
             else if(num == e2) ++c2;
             else if(c1 == 0) e1 = num, c1 = 1;

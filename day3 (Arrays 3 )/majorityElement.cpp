@@ -7,8 +7,8 @@ public:
     int majorityElement(vector<int>& nums) {
         int cnt = 0, e = 0;
         for(int num : nums){
+            if(cnt == 0) e = num;
             if(e == num) ++cnt;
-            else if(cnt == 0) e = num;
             else --cnt;
         }
         return e;

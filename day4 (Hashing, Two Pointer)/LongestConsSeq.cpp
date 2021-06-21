@@ -23,13 +23,18 @@ void solve()
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        set<int> st;
-        for(int n : nums) st.insert(n);
+        // push every elements in a set
+        set<int> elements;
+        for(int n : nums) elements.insert(n);
         int mx = 0;
-        for(int n : st){
-            if(st.count(n-1)^1){
+        // iterate and find the min of a seq, 
+        // for that just check if num-1 exists in the set or not
+        // if exists, it is not the minimum
+        for(int n : elements){
+            // found the minimum, now find length of this subsequence
+            if(elements.count(n-1)^1){
                 int cur = 0;
-                while(st.count(n++)){
+                while(elements.count(n++)){
                     ++cur;
                     mx = max(cur, mx);
                 }
