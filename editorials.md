@@ -20,3 +20,6 @@ n&1 | (n&1)^1
 * 20 : bitmask, O (2^n) solution.
 <br><br>
 <img src="https://codeforces.com/predownloaded/83/0d/830da2701ec5d3baacbea1af54eb16a4021abf6b.jpg">
+
+###  Why memoization not passing all test cases, the time complexity is the same still why such behavior?
+> due to use of stack in recursion
