@@ -23,3 +23,22 @@ n&1 | (n&1)^1
 
 ###  Why memoization not passing all test cases, the time complexity is the same still why such behavior?
 > due to use of stack in recursion
+
+## vector.size() returns a size_t
+```
+vector<int> v;
+cout<<v.size()-1;
+```
+The following will give you 18446744073709551615. 
+
+This is because vector.size() returns a size_t type value, which is an alias for unsigned long int. In plain terms:
+```
+unsigned long int a=0;
+cout<<a-1;
+```
+
+The above code will give the same result — 18446744073709551615.
+### Solution
+```
+for(int i = 0; i < (int) vector.size() - 1; i++) { }
+```
