@@ -3,6 +3,28 @@ using namespace std;
 
 class Solution {
 public:
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<int> vis(n, 0);
+        for(int i=0; i<n; ++i){
+            if(vis[i]==0 && !dfs(i, 1, vis, graph)) return 0;
+        }
+        return 1;
+    }
+    
+    bool dfs(int node, int group, vector<int> &vis, vector<vector<int>> graph){
+        vis[node] = group;
+        for(auto it:graph[node]){
+            if(vis[it]==group) return 0;
+            if(vis[it]==0 && !dfs(it, -group, vis, graph)) return 0;
+        }
+        return 1;
+    }
+};
+
+// another LC problem
+class Solution {
+public:
     bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
         vector<int> adj[n];
         for(auto it:dislikes){

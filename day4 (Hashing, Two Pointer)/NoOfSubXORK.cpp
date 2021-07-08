@@ -10,6 +10,7 @@ public:
         for(int n : nums){
             xr ^= n;
             if(xr == k) ++ans;
+            // for sum k => freq.find(sum-k)
             if(freq.find(xr ^ k) != freq.end()) ans += freq[xr^k];
             ++freq[xr];
         }
