@@ -22,6 +22,27 @@ public:
     }
 };
 
+// another approach pass by value
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        gen(nums, ans, 0);
+        return ans;
+    }
+    
+    void gen(vector<int> nums, vector<vector<int>> &ans, int ind){
+        if(ind==nums.size()){
+            ans.push_back(nums);
+            return;
+        }
+        for(int i=ind; i<nums.size(); ++i){
+            swap(nums[ind], nums[i]);
+            gen(nums, ans, ind+1);
+        }
+    }
+};
+
 // another approach, not backtracking
 class Solution {
 public:
@@ -59,6 +80,29 @@ private:
             }
             swap(nums[i], nums[j]);
             reverse(nums.begin() + i + 1, nums.end());
+        }
+    }
+};
+
+// for unique permutations
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        gen(nums, ans, 0);
+        return ans;
+    }
+    void gen(vector<int> nums, vector<vector<int>> &ans, int ind){
+        if(ind==nums.size()){
+            ans.push_back(nums);
+            return;
+        }
+        for(int i=ind; i<nums.size(); ++i){
+            // just skip same elements
+            if(i!=ind && nums[i]==nums[ind]) continue;
+            swap(nums[ind], nums[i]);
+            gen(nums, ans, ind+1);
         }
     }
 };
