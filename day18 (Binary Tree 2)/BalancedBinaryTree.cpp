@@ -12,11 +12,24 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-int maxDepth(TreeNode *root)
+class Solution
 {
-    if (root == NULL)
-        return 0;
-    int lh = maxDepth(root->left);
-    int rh = maxDepth(root->right);
-    return 1 + max(lh, rh);
-}
+private:
+    bool ans = 1;
+
+public:
+    bool isBalanced(TreeNode *root)
+    {
+        dfs(root);
+        return ans;
+    }
+
+    int dfs(TreeNode *root)
+    {
+        if (!root)
+            return 0;
+        int lh = dfs(root->left), rh = dfs(root->right);
+        ans &= abs(lh - rh) < 2;
+        return 1 + max(lh, rh);
+    }
+};
