@@ -4,7 +4,7 @@ using namespace std;
 class Solution
 {
 public:
-    void letsgofrom(int r, int c, vector<vector<int>> &m, vector<string> &ans, vector<vector<bool>> &vis, string cur, int n, int dirs[8], string moves)
+    void letsGoFrom(int r, int c, vector<vector<int>> &m, vector<string> &ans, vector<vector<bool>> &vis, string cur, int n, int dirs[8], string moves)
     {
         if (r == n - 1 && c == n - 1)
         {
@@ -18,7 +18,7 @@ public:
             if (nr >= 0 && nc >= 0 && nr < n && nc < n && !vis[nr][nc] && m[nr][nc] == 1)
             {
                 vis[r][c] = 1;
-                letsgofrom(nr, nc, m, ans, vis, cur + moves[i], n, dirs, moves);
+                letsGoFrom(nr, nc, m, ans, vis, cur + moves[i], n, dirs, moves);
                 vis[r][c] = 0;
             }
         }
@@ -32,7 +32,7 @@ public:
         int dirs[8] = {1, 0, 0, -1, 0, 1, -1, 0};
         string moves = "DLRU";
         if (m[0][0])
-            letsgofrom(0, 0, m, ans, vis, "", n, dirs, moves);
+            letsGoFrom(0, 0, m, ans, vis, "", n, dirs, moves);
         return ans;
     }
 };
