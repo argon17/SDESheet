@@ -9,7 +9,7 @@ bool isPossible(vector<int> &books, int studs, int ans)
         cur = 0;
         if (ans < books[i])
             return 0;
-        while (cur + books[i] <= ans)
+        while (cur + books[i] <= ans && i<n)
         {
             cur += books[i++];
         }
