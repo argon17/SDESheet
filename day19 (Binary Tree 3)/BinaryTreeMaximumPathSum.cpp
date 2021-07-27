@@ -13,18 +13,17 @@ struct TreeNode {
 };
 
 class Solution {
-private:
-    int mx;
+    int mx = -1e5;
 public:
     int maxPathSum(TreeNode* root) {
-        mx = INT_MIN;
-        maxStSum(root);
+        calc(root);
         return mx;
     }
-    int maxStSum(TreeNode* root){
+    int calc(TreeNode *root){
         if(!root) return 0;
-        int l = max(0, maxStSum(root->left)), r = max(0, maxStSum(root->right));
-        mx = max(mx, root->val + l + r);
-        return root->val + max(l, r);
+        // if leftMx / rightMx is negative, don't consider it.
+        int leftMx = max(0, calc(root->left)), rightMx = max(0, calc(root->right));
+        mx = max(mx, root->val + leftMx + rightMx);
+        return root->val + max(leftMx, rightMx);
     }
 };
