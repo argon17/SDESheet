@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 // Dijkstra on Graph
 
 const int INF = 2147483647;
@@ -25,7 +24,7 @@ void dijkstra()
 
         int curNode = cur.second, curDist = -cur.first;
         if (curDist > dist[curNode]) continue;
-        
+
         // {node, weight}
         for (pair<int, int> neighbor : adj[curNode])
         {
@@ -39,28 +38,31 @@ void dijkstra()
     }
 }
 
-
-
 // Dijkstra on grid
 
 const int row = 5, col = 5;
 
-bool inside(int r, int c) {
+bool inside(int r, int c)
+{
     return r >= 0 && r < row && c >= 0 && c < col;
 }
 
-int dijkstra(int grid[row][col]) {
+int dijkstra(int grid[row][col])
+{
     int dist[row][col];
-    for (int i = 0; i < row; ++i) {
-        for (int j = 0; j < col; ++j) {
+    for (int i = 0; i < row; ++i)
+    {
+        for (int j = 0; j < col; ++j)
+        {
             dist[i][j] = INT_MAX;
         }
     }
     // {dist, node}
     priority_queue<pair<int, int>> q;
     dist[0][0] = grid[0][0];
-    q.push({ -grid[0][0], 0});
-    while (q.size()) {
+    q.push({-grid[0][0], 0});
+    while (q.size())
+    {
         auto cur = q.top();
         q.pop();
         int curNode = cur.second;
@@ -68,14 +70,15 @@ int dijkstra(int grid[row][col]) {
         int curDist = -cur.first;
         if (curDist > dist[curNodeX][curNodeY]) continue;
         int dirs[] = {0, 1, 0, -1, 0};
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; ++i)
+        {
             int nextNodeX = curNodeX + dirs[i];
             int nextNodeY = curNodeY + dirs[i + 1];
             if (1 ^ inside(nextNodeX, nextNodeY)) continue;
             int nextDist = curDist + grid[nextNodeX][nextNodeY];
             if (nextDist > dist[nextNodeX][nextNodeY]) continue;
             dist[nextNodeX][nextNodeY] = nextDist;
-            q.push({ -nextDist, nextNodeX * col + nextNodeY});
+            q.push({-nextDist, nextNodeX * col + nextNodeY});
         }
     }
     return dist[row - 1][col - 1];
