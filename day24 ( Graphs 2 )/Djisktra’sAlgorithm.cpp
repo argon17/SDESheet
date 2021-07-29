@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Dijkstra on Graph
+// Dijkstra on Graph [O(V + ElogV)]
 
 const int INF = 2147483647;
 const int MAX = 5005;
@@ -23,7 +23,8 @@ void dijkstra()
         q.pop();
 
         int curNode = cur.second, curDist = -cur.first;
-        if (curDist > dist[curNode]) continue;
+        if (curDist > dist[curNode])
+            continue;
 
         // {node, weight}
         for (pair<int, int> neighbor : adj[curNode])
@@ -31,9 +32,11 @@ void dijkstra()
             int nextNode = neighbor.first;
             int nextDist = curDist + neighbor.second;
 
-            if (nextDist > dist[nextNode]) continue;
-            dist[nextNode] = nextDist;
-            q.push({-nextDist, nextNode});
+            if (nextDist < dist[nextNode])
+            {
+                dist[nextNode] = nextDist;
+                q.push({-nextDist, nextNode});
+            }
         }
     }
 }
@@ -68,15 +71,18 @@ int dijkstra(int grid[row][col])
         int curNode = cur.second;
         int curNodeX = cur.second / col, curNodeY = cur.second % col;
         int curDist = -cur.first;
-        if (curDist > dist[curNodeX][curNodeY]) continue;
+        if (curDist > dist[curNodeX][curNodeY])
+            continue;
         int dirs[] = {0, 1, 0, -1, 0};
         for (int i = 0; i < 4; ++i)
         {
             int nextNodeX = curNodeX + dirs[i];
             int nextNodeY = curNodeY + dirs[i + 1];
-            if (1 ^ inside(nextNodeX, nextNodeY)) continue;
+            if (1 ^ inside(nextNodeX, nextNodeY))
+                continue;
             int nextDist = curDist + grid[nextNodeX][nextNodeY];
-            if (nextDist > dist[nextNodeX][nextNodeY]) continue;
+            if (nextDist > dist[nextNodeX][nextNodeY])
+                continue;
             dist[nextNodeX][nextNodeY] = nextDist;
             q.push({-nextDist, nextNodeX * col + nextNodeY});
         }
