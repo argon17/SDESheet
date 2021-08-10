@@ -39,3 +39,25 @@ public:
         return dp[n][target];
     }
 };
+
+// Optimized 1D DP
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int n = nums.size();
+        int sum = 0;
+        for(int num : nums){
+            sum += num;
+        }
+        if(sum & 1) return 0;
+        int target = sum/2;
+        vector<bool> dp(target+1, 0);
+        dp[0] = 1;
+        // for each element
+        for(int i=0; i<n; ++i)
+            // complete target from rtl
+            for(int j=target; j>=nums[i]; --j)
+                dp[j] = dp[j] || dp[j-nums[i]];
+        return dp[target];
+    }
+};
