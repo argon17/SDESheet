@@ -15,34 +15,35 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        int cnt = 0;
-        ListNode* curr = head;
-        while(curr){
-            ++cnt;
-            curr = curr->next;
-        }
         ListNode* dummy = new ListNode();
         dummy->next = head;
-        ListNode* pre = dummy, *cur = dummy, *nex = dummy;
-        // reverse the group only if more than equal to k nodes left
-        while(cnt>=k){
-            // before starting the next group reversal
-            // maintain the sliding pointers, pre->cur->nex
+        ListNode* pre = dummy, *cur, *nex;
+        int cnt = length(head);
+        // reverse k-1 links in each group of k
+        while(cnt >= k){
             cur = pre->next;
             nex = cur->next;
-            //reverse group of k, total k-1 links will be reversed
-            for(int i=1; i<k; ++i){
-                // before manipulating nex next, dont lose it
-                cur->next = nex->next;
-                // reverse one link
-                nex->next = pre->next;
-                // still couldn't get the intuition
-                pre->next = nex;
-                nex = cur->next;
-            }
+            for(int i = 1; i < k; ++i)
+                reverseSingleLink(pre, cur, nex);
+            cnt -= k;
             pre = cur;
-            cnt-=k;
         }
         return dummy->next;
     }
+private:
+    void reverseSingleLink(ListNode* &pre, ListNode* &cur, ListNode* &nex){
+        nex = cur->next;
+        cur->next = nex->next;
+        nex->next = pre->next;
+        pre->next = nex;
+    }
+    int length(ListNode* head){
+        int cnt = 0;
+        while(head){
+            ++cnt;
+            head = head->next;
+        }
+        return cnt;
+    }
+    
 };
