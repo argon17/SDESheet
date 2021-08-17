@@ -3,7 +3,7 @@ using namespace std;
 
 class MyQueue {
 public:
-    stack<int> sm, sa;
+    stack<int> sm, sa; // Main Stack, Auxilliary Stack
     /** Initialize your data structure here. */
     MyQueue() {
         

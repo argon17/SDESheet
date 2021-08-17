@@ -39,3 +39,42 @@ public:
         return dummy->next;
     }
 };
+
+// 4->5 & 3->4->5 = 3->9->0
+
+class Solution
+{
+    public:
+    //Function to add two numbers represented by linked list.
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        // code here
+        Node* a = reverse(first);
+        Node* b = reverse(second);
+        Node* dummy = new Node(0), *cur = dummy;
+        int carry = 0;
+        while(a || b || carry){
+            int s = 0;
+            if(a) s += a->data, a = a->next;
+            if(b) s += b->data, b = b->next;
+            s += carry;
+            carry = s/10;
+            Node* tmp = new Node(s%10);
+            cur->next = tmp;
+            cur = cur->next;
+        }
+        Node* ans = reverse(dummy->next);
+        return ans;
+    }
+    private:
+    struct Node* reverse(struct Node* head){
+        Node* p = head, *q = NULL, *r = NULL;
+        while(p){
+            r = q;
+            q = p;
+            p = p->next;
+            q -> next = r;
+        }
+        return q;
+    }
+};
