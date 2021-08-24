@@ -11,10 +11,10 @@ void nextPermutation(vector<int>& nums) {
             break;
         }
     }
-    if(pivot==-1){
-        reverse(nums.begin()+pivot+1, nums.end());
-        return;
-    }
+    // if(pivot==-1){
+    //     reverse(nums.begin()+pivot+1, nums.end());
+    //     return;
+    // }
     // find just greater elem from rtl than nums[pivot] and swap
     for(int i=n-1; i>pivot; --i){
         if(nums[i]>nums[pivot]){
