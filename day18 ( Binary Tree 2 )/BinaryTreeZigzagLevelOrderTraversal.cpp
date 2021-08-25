@@ -12,34 +12,27 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-class Solution
-{
+class Solution {
 public:
-    vector<vector<int>> zigzagLevelOrder(TreeNode *root)
-    {
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         vector<vector<int>> ans;
-        if (!root)
-            return ans;
-        queue<TreeNode *> q;
+        if(!root) return ans;
+        queue<TreeNode*> q;
         q.push(root);
-        bool ltr = 1;
-        while (q.size())
-        {
+        bool rtl = 0;
+        while(q.size()){
             int sz = q.size();
-            vector<int> levels(sz);
-            for (int i = 0; i < sz; ++i)
-            {
-                TreeNode *cur = q.front();
+            vector<int> level;
+            while(sz--){
+                TreeNode* cur = q.front();
                 q.pop();
-                int ind = ltr ? i : sz - 1 - i;
-                levels[ind] = cur->val;
-                if (cur->left)
-                    q.push(cur->left);
-                if (cur->right)
-                    q.push(cur->right);
+                level.push_back(cur->val);
+                if(cur->left) q.push(cur->left);
+                if(cur->right) q.push(cur->right);
             }
-            ltr = 1 - ltr;
-            ans.push_back(levels);
+            if(rtl) reverse(level.begin(), level.end());
+            rtl = 1 ^ rtl;
+            ans.push_back(level);
         }
         return ans;
     }

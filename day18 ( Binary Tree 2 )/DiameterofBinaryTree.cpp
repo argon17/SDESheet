@@ -13,21 +13,19 @@ struct TreeNode
 };
 
 // O(n) solution
-class Solution
-{
+class Solution {
 public:
-    int diameterOfBinaryTree(TreeNode *root)
-    {
-        return dfs(root).first;
+    int diameterOfBinaryTree(TreeNode* root) {
+        int diam = 0;
+        dfs(root, diam);
+        return diam;
     }
-
 private:
-    // {diameter, height}
-    pair<int, int> dfs(TreeNode *root)
-    {
-        if (!root)
-            return {0, 0};
-        pair<int, int> l = dfs(root->left), r = dfs(root->right);
-        return {max({l.first, r.first, l.second + r.second}), 1 + max(l.second, r.second)};
+    int dfs(TreeNode* root, int &diam){
+        if(!root) return 0;
+        int lh = dfs(root->left, diam);
+        int rh = dfs(root->right, diam);
+        diam = max(diam, lh + rh);
+        return 1 + max(lh, rh);
     }
 };

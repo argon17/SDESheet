@@ -11,13 +11,13 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-class Solution
-{
+class Solution {
 public:
-    bool isSameTree(TreeNode *p, TreeNode *q)
-    {
-        if (p && q)
-            return p->val == q->val && isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p && q)
+        return p->val == q->val
+            && isSameTree(p->left, q->left)
+            && isSameTree(p->right, q->right);
         return p == q;
     }
 };
