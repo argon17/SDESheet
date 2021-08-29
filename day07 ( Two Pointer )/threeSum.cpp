@@ -1,37 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+    vector<vector<int>> threeSum(vector<int> &nums)
+    {
         int n = nums.size();
-        sort(nums.begin(), nums.end());
         vector<vector<int>> ans;
-        for(int i = 0; i < n; i++){
-            int sr = 0 - ( nums[i] );
-            int lo = i + 1, hi = n - 1;
-            while( lo < hi ){
-                int s = nums[lo] + nums[hi];
-                if( s < sr ){
-                    lo++;
-                    while( lo < hi && nums[lo] == nums[lo-1] ) lo++;
-                } 
-                else if( s > sr ){
-                    hi--;
-                    while( lo < hi && nums[hi] == nums[hi+1] ) hi--;
-                } 
-                else{
-                    vector<int> _ans;
-                    _ans.push_back(nums[i]);
-                    _ans.push_back(nums[lo]);
-                    _ans.push_back(nums[hi]);
-                    ans.push_back(_ans);
-                    lo++; hi--;
-                    while( lo < hi && nums[lo] == nums[lo-1] ) lo++;
-                    while( lo < hi && nums[hi] == nums[hi+1] ) hi--;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < n; ++i)
+        {
+            if(nums[i] > 0) break;
+            if (i && nums[i] == nums[i - 1]) continue;
+            int target = -nums[i];
+            int l = i + 1, r = n - 1;
+            while (l < r)
+            {
+                if (nums[l] + nums[r] == target)
+                {
+                    ans.push_back({nums[i], nums[l], nums[r]});
+                    while (l < r && nums[l] == nums[l + 1]) ++l;
+                    while (l < r && nums[r] == nums[r - 1]) --r;
+                    ++l; --r;
                 }
+                else if (nums[l] + nums[r] < target) ++l;
+                else --r;
             }
-            while( i < n-1 && nums[i+1] == nums[i] ) i++;
         }
         return ans;
     }
