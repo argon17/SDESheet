@@ -21,3 +21,6 @@ public:
         return ans;
     }
 };
+
+// Two-pointers solution, walking from each end, 
+// guarantees the shorter edge meets its furthest taller edge. Simple as that.
