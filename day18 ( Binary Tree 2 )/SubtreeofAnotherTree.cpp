@@ -13,11 +13,14 @@ struct TreeNode {
 
 class Solution {
 public:
-    bool isSameTree(TreeNode* a, TreeNode* b) {
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if(!root) return 0;
+        return isSame(root, subRoot) || isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
+    }
+private:
+    bool isSame(TreeNode* a, TreeNode* b){
         if(!a) return !b;
         if(!b) return !a;
-        return (a->val==b->val) 
-                && isSameTree(a->left, b->left) 
-                && isSameTree(a->right, b->right);
+        return (a->val==b->val) && isSame(a->left, b->left) && isSame(a->right, b->right);
     }
 };
