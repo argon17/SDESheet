@@ -9,7 +9,7 @@ class Solution
 	    if(vis[node]) return;
 	    vis[node] = 1;
 	    for(auto nbr : adj[node])
-	        dfs(nbr, adj, vis, st);
+	        dfs(nbr, adj, vis, ans);
 	   ans.push_back(node);
 	}
 	
